@@ -17,4 +17,8 @@ mongoose
 
 const port = process.env.PORT || 2801;
 
+const userRoute = require('./models/user');
+
+app.use('/users', userRoute);
+
 app.listen(port, () => console.log(`start listening on port ${port}`));
