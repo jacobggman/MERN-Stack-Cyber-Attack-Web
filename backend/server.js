@@ -15,10 +15,15 @@ mongoose
   .then(() => console.log('connect to MongoDB'))
   .catch((err) => console.log(err));
 
-const port = process.env.PORT || 2801;
+const port = process.env.PORT || 2802;
 
-const userRoute = require('./models/user');
+const userRoute = require('./routes/user');
 
 app.use('/users', userRoute);
+
+// default routing
+app.use(function (req, res, next) {
+  res.status(400).json('File not found');
+});
 
 app.listen(port, () => console.log(`start listening on port ${port}`));
