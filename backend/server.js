@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const config = require('config');
 
 require('dotenv').config();
 
@@ -8,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const uri = 'mongodb://127.0.0.1:27017';
+const uri = config.get('mongoURI');
 
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })

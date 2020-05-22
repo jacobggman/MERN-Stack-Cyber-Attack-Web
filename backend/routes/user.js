@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const bcryptjs = require('bcryptjs');
 let UserModel = require('../models/user');
+const config = require('config');
+const jwt = require('jsonwebtoken');
+
+const HOUR = 3600;
 
 function getHash(password) {
   hash = bcryptjs.hash(password, 10);
@@ -32,15 +36,26 @@ router.route('/add').post((req, res) => {
       newUser.password = hash;
       newUser
         .save()
-        .then(() =>
-          res.json({
-            user: {
-              id: newUser.id,
-              hash: newUser.password,
-              email: newUser.email,
+        .then((user) => {
+          jwt.sign(
+            { user: user.id },
+            config.get('jwtSecret'),
+            {
+              expiresIn: HOUR,
             },
-          })
-        )
+            (err, token) => {
+              if (err) throw err;
+              res.json({
+                token,
+                user: {
+                  id: newUser.id,
+                  hash: newUser.password,
+                  email: newUser.email,
+                },
+              });
+            }
+          );
+        })
         .catch((err) => returnError(res, err));
     })
     .catch((err) => returnError(res, err));
