@@ -15,7 +15,8 @@ router.route('/add').post((req, res) => {
   const name = req.body.name;
   const newUser = new User({ name });
 
-  newUser.save
+  newUser
+    .save()
     .then(() => res.json('User added!'))
     .catch((err) => returnError(res, err));
 });
