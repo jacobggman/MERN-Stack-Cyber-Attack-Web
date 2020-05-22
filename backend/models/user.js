@@ -22,31 +22,35 @@ function validatePassword(password) {
   return re.test(password);
 }
 
+function pleaseField(fieldName) {
+  return `Please fill ${fieldName} field`;
+}
+
 const userSchema = new Schema(
   {
     firstName: {
       type: String,
-      required: true,
-      minlength: 2,
-      maxlength: 20,
+      required: [true, pleaseField('first name')],
+      minlength: [2, 'First name need to be at least 2 characters'],
+      maxlength: [20, 'First name need to be less then 20 characters'],
       validate: [validateName, illegalNameMsg],
     },
     lastName: {
       type: String,
-      required: true,
-      minlength: 2,
-      maxlength: 20,
+      required: [true, pleaseField('last name')],
+      minlength: [2, 'Last name need to be at least 2 characters'],
+      maxlength: [20, 'Last name need to be less then 20 characters'],
       validate: [validateName, illegalNameMsg],
     },
     password: {
       type: String,
-      required: true,
-      validate: [validatePassword, illegalPasswordMsg],
+      required: [true, pleaseField('password')],
+      // no need for validate because it saving a hash and password is checked already
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
+      required: [true, pleaseField('email')],
+      unique: [true, 'Already user with this email'],
       validate: [validateEmail, illegalEmailMsg],
     },
   },
@@ -55,4 +59,4 @@ const userSchema = new Schema(
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = { User, illegalPasswordMsg, validatePassword };
