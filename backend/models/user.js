@@ -50,7 +50,7 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: [true, pleaseField('email')],
-      unique: [true, 'Already user with this email'],
+      unique: [true, 'Already have a user with this email'],
       validate: [validateEmail, illegalEmailMsg],
     },
   },
