@@ -13,7 +13,7 @@ export default function sendData(url, fieldsNames, callback) {
     .then((res) => {
       alert(res.data.token);
       console.log(res.data.token);
-      callback(res.data.token);
+      return callback(res.data.token);
     })
     .catch((err) => {
       if (err.response !== undefined) {

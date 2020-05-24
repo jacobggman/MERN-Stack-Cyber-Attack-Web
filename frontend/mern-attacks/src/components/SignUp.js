@@ -110,6 +110,7 @@ export default function SignUp() {
                 ['password', 'email', 'firstName', 'lastName'],
                 (res) => {
                   localStorage.setItem('token', res.token);
+                  window.location = 'http://localhost:3000/attacks';
                 }
               )
             }

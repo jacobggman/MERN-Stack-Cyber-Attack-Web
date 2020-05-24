@@ -19,7 +19,7 @@ function auth(req, res, next) {
   }
 }
 
-router.route('/').post(auth, (req, res) => {
+router.route('/').get(auth, (req, res) => {
   Attack.find()
     .then((attacks) => res.json(attacks))
     .catch((err) => res.status(400).json('Error: ' + err));
