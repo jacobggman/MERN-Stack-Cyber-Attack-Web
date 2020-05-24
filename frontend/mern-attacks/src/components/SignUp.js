@@ -13,8 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from './Copyright';
-import axios from 'axios';
-//import sendData from './sendData';
+import sendData from './sendData';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,29 +34,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-function getInput(element_id) {
-  return document.getElementById(element_id).value;
-}
-
-function sendData() {
-  const input = {
-    password: getInput('password'),
-    email: getInput('email'),
-    firstName: getInput('firstName'),
-    lastName: getInput('lastName'),
-  };
-  axios
-    .post('http://localhost:2802/users/add', input)
-    .then((res) => {
-      console.log(res);
-      alert(res);
-    })
-    .catch((err) => {
-      console.log(err.response.data);
-      alert(err.response.data);
-    });
-}
 
 export default function SignUp() {
   const classes = useStyles();
@@ -128,7 +104,14 @@ export default function SignUp() {
             </Grid>
           </Grid>
           <Button
-            onClick={sendData}
+            onClick={() =>
+              sendData('http://localhost:2802/users/add', [
+                'password',
+                'email',
+                'firstName',
+                'lastName',
+              ])
+            }
             fullWidth
             variant="contained"
             color="primary"
