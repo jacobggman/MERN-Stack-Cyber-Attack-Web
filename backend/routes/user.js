@@ -51,7 +51,7 @@ router.route('/add').post((req, res) => {
             }
           );
         })
-        .catch((err) => returnError(res, err));
+        .catch((err) => returnError(res, 'User already exists'));
     });
   });
 });
