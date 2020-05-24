@@ -92,11 +92,15 @@ export default function SignInSide() {
               label="Remember me"
             />
             <Button
-              onClick={() =>
-                sendData('http://localhost:2802/users/login', [
-                  'password',
-                  'email',
-                ])
+              onClick={
+                (() =>
+                  sendData('http://localhost:2802/users/login', [
+                    'password',
+                    'email',
+                  ]),
+                (res) => {
+                  localStorage.setItem('token', res.token);
+                })
               }
               fullWidth
               variant="contained"

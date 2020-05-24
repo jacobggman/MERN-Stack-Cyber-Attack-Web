@@ -105,12 +105,13 @@ export default function SignUp() {
           </Grid>
           <Button
             onClick={() =>
-              sendData('http://localhost:2802/users/add', [
-                'password',
-                'email',
-                'firstName',
-                'lastName',
-              ])
+              sendData(
+                'http://localhost:2802/users/add',
+                ['password', 'email', 'firstName', 'lastName'],
+                (res) => {
+                  localStorage.setItem('token', res.token);
+                }
+              )
             }
             fullWidth
             variant="contained"

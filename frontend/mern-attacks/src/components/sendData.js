@@ -4,15 +4,16 @@ function getInput(element_id) {
   return document.getElementById(element_id).value;
 }
 
-export default function sendData(url, fieldsNames) {
+export default function sendData(url, fieldsNames, callback) {
   let sendData = {};
   fieldsNames.forEach((name) => (sendData[name] = getInput(name)));
 
   axios
     .post(url, sendData)
     .then((res) => {
-      console.log(res.response.data);
-      alert(res.response.data);
+      alert(res.data.token);
+      console.log(res.data.token);
+      callback(res.data.token);
     })
     .catch((err) => {
       if (err.response !== undefined) {
