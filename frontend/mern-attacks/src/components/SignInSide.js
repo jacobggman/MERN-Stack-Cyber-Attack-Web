@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Copyright from './Copyright';
+import sendData from './sendData';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,7 +92,12 @@ export default function SignInSide() {
               label="Remember me"
             />
             <Button
-              type="submit"
+              onClick={() =>
+                sendData('http://localhost:2802/users/login', [
+                  'password',
+                  'email',
+                ])
+              }
               fullWidth
               variant="contained"
               color="primary"
