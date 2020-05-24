@@ -18,8 +18,12 @@ function returnError(res, err) {
 router.route('/add').post((req, res) => {
   let newUser = new UserModel.User(req.body);
 
-  if (!UserModel.validatePassword(newUser.password)) {
-    returnError(res, UserModel.illegalPasswordMsg);
+  if (newUser.password) {
+    if (!UserModel.validatePassword(newUser.password)) {
+      return returnError(res, UserModel.illegalPasswordMsg);
+    }
+  } else {
+    return returnError(res, 'Please enter a password');
   }
 
   // hash password

@@ -9,7 +9,7 @@ function validateName(name) {
   return nameRegex.test(name); // Assuming email has a text attribute
 }
 
-const illegalEmailMsg = 'Please fill read email address';
+const illegalEmailMsg = 'Please enter a real email address';
 function validateEmail(email) {
   var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
