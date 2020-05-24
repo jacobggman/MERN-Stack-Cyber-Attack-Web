@@ -9,50 +9,45 @@ import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+function createAttack(
+  id,
+  description,
+  x_mitre_platforms,
+  x_mitre_detection,
+  phase_name
+) {
+  return { id, description, x_mitre_platforms, x_mitre_detection, phase_name };
 }
 
 const rows = [
-  createData(
+  createAttack(
     0,
     '16 Mar, 2019',
     'Elvis Presley',
     'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44
+    'VISA ⠀•••• 3719'
   ),
-  createData(
+  createAttack(
     1,
-    '16 Mar, 2019',
+    '16 Magggggggggggggggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddakfsjasfklja lkf la klasf alks fasls faslk aklf askljf lakjfs ksaljf alskjf laks jklfa jr, 2019',
     'Paul McCartney',
     'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99
+    'VISA ⠀•••• 2574'
   ),
-  createData(
-    2,
-    '16 Mar, 2019',
-    'Tom Scholz',
-    'Boston, MA',
-    'MC ⠀•••• 1253',
-    100.81
-  ),
-  createData(
+  createAttack(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253'),
+  createAttack(
     3,
     '16 Mar, 2019',
     'Michael Jackson',
     'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39
+    'AMEX ⠀•••• 2000'
   ),
-  createData(
+  createAttack(
     4,
     '15 Mar, 2019',
     'Bruce Springsteen',
     'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79
+    'VISA ⠀•••• 5919'
   ),
 ];
 
@@ -66,28 +61,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders() {
+// id, description, x_mitre_platforms, x_mitre_detection, phase_name
+export default function Attacks() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
+      <Title>Recent Attacks</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Id</TableCell>
+            <TableCell>Description</TableCell>
+            <TableCell>x_mitre_platforms</TableCell>
+            <TableCell>x_mitre_detection</TableCell>
+            <TableCell>phase_name</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
+              <TableCell>{row.id}</TableCell>
+              <TableCell>{row.description}</TableCell>
+              <TableCell>{row.x_mitre_platforms}</TableCell>
+              <TableCell>{row.x_mitre_detection}</TableCell>
+              <TableCell>{row.phase_name}</TableCell>
               <TableCell align="right">{row.amount}</TableCell>
             </TableRow>
           ))}
@@ -95,7 +92,7 @@ export default function Orders() {
       </Table>
       <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
+          See more attacks
         </Link>
       </div>
     </React.Fragment>

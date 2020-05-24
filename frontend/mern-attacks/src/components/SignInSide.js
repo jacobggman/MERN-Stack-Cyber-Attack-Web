@@ -98,6 +98,7 @@ export default function SignInSide() {
                   ['password', 'email'],
                   (res) => {
                     localStorage.setItem('token', res.token);
+                    window.location = 'http://localhost:3000/attacks';
                   }
                 );
               }}
