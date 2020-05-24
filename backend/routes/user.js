@@ -15,12 +15,6 @@ function returnError(res, err) {
   res.status(400).json('Error: ' + err);
 }
 
-router.route('/').get((req, res) => {
-  UserModel.User.find()
-    .then((users) => res.json(users))
-    .catch((err) => res.status(400).json('Error: ' + err));
-});
-
 router.route('/add').post((req, res) => {
   let newUser = new UserModel.User(req.body);
 
