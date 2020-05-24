@@ -19,6 +19,18 @@ function auth(req, res, next) {
   }
 }
 
+router.route('/add').post((req, res) => {
+  let newUser = new Attack(req.body);
+  newUser
+    .save()
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
 router.route('/').post(auth, (req, res) => {
   Attack.find()
     .then((attacks) => res.json(attacks))
