@@ -19,8 +19,10 @@ mongoose
 const port = process.env.PORT || 2802;
 
 const userRoute = require('./routes/user');
+const attackRoute = require('./routes/attack');
 
 app.use('/users', userRoute);
+app.use('/attacks', attackRoute);
 
 // default routing
 app.use(function (req, res, next) {
