@@ -13,7 +13,10 @@ import ShowMoreText from 'react-show-more-text';
 // todo:
 
 // must - 4h
-// search description - 2h
+// fixing text style - 2h
+// search description - 2h:
+// add get more
+// add max number
 
 // bonus - 3h
 // see collection
@@ -111,7 +114,6 @@ export default class Attacks extends Component {
                 </TableCell>
                 <TableCell>{row.x_mitre_platforms.toString()}</TableCell>
                 <TableCell>
-                  width: 50
                   <ShowMoreText>{row.x_mitre_detection}</ShowMoreText>
                 </TableCell>
                 <TableCell>{row.phase_name}</TableCell>
