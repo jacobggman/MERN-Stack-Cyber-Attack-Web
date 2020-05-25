@@ -99,24 +99,24 @@ export default class Attacks extends Component {
           <TableHead>
             <TableRow>
               <TableCell>Id</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>x_mitre_platforms</TableCell>
-              <TableCell>x_mitre_detection</TableCell>
               <TableCell>phase_name</TableCell>
+              <TableCell>x_mitre_platforms</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>x_mitre_detection</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {this.state.attacks.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
+                <TableCell>{row.phase_name}</TableCell>
+                <TableCell>{row.x_mitre_platforms.toString()}</TableCell>
                 <TableCell>
                   <ShowMoreText>{row.description}</ShowMoreText>
                 </TableCell>
-                <TableCell>{row.x_mitre_platforms.toString()}</TableCell>
                 <TableCell>
                   <ShowMoreText>{row.x_mitre_detection}</ShowMoreText>
                 </TableCell>
-                <TableCell>{row.phase_name}</TableCell>
                 <TableCell align="right">{row.amount}</TableCell>
               </TableRow>
             ))}
