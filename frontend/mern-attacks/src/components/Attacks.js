@@ -77,6 +77,7 @@ async function getAttacks() {
 // class Attacks extends React.Component
 const classes = 'useStyles()';
 
+// https://material-ui.com/components/tables/
 export default class Attacks extends Component {
   constructor(props) {
     super(props);
