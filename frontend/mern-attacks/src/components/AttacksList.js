@@ -115,7 +115,7 @@ export default class Attacks extends Component {
               <TableCell>Id</TableCell>
               <TableCell>phase_name</TableCell>
               <TableCell>x_mitre_platforms</TableCell>
-              <TableCell>Description</TableCell>
+              <TableCell>description</TableCell>
               <TableCell>x_mitre_detection</TableCell>
             </TableRow>
           </TableHead>
