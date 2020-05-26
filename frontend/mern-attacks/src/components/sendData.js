@@ -11,8 +11,6 @@ export default function sendData(url, fieldsNames, callback) {
   axios
     .post(url, sendData)
     .then((res) => {
-      alert(res.data.token);
-      console.log(res.data.token);
       return callback(res.data.token);
     })
     .catch((err) => {
