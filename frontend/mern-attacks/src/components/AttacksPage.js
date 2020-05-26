@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Attacks from './AttacksList';
 import Copyright from './Copyright';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const drawerWidth = 240;
 
@@ -93,7 +95,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+class SearchField extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.name = props.name;
+  }
+
+  render() {
+    return (
+      <TextField
+        variant="outlined"
+        margin="normal"
+        name={this.name}
+        label={this.name}
+        type={this.name}
+        id={this.name}
+        onChange={() => alert('wow!')}
+      />
+    );
+  }
+}
+
+export default function AttacksPage() {
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -120,7 +144,22 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={12}>
-              <Paper className={fixedHeightPaper}></Paper>
+              <Paper>
+                <SearchField name="Id" />
+                <SearchField name="phase_name" />
+                <SearchField name="x_mitre_platforms" />
+                <SearchField name="description" />
+                <SearchField name="x_mitre_detection" />
+                <Button
+                  onClick={() => alert('hi!')}
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Search
+                </Button>
+              </Paper>
             </Grid>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
