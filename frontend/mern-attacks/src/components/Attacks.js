@@ -108,7 +108,7 @@ export default class Attacks extends Component {
     const addAttacksFunc = this;
     return (
       <React.Fragment>
-        <Title>Recent Attacks</Title>
+        <Title>Attacks List</Title>
         <Table size="small">
           <TableHead>
             <TableRow>
