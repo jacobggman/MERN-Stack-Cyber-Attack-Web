@@ -66,14 +66,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-async function getAttacks() {
+async function getAttacks(skip) {
   const config = { headers: { 'Content-Type': 'application/json' } };
+  config['skip'] = skip;
   config.headers['x-auth-token'] = localStorage.getItem('token');
-  const response = await axios.get('http://localhost:2802/attacks', config);
+  const response = await axios.post(
+    'http://localhost:2802/attacks',
+    { skip },
+    {
+      headers: config.headers,
+    }
+  );
   return response.data;
 }
 
-// id, description, x_mitre_platforms, x_mitre_detection, phase_name
 // class Attacks extends React.Component
 const classes = 'useStyles()';
 
@@ -84,17 +90,22 @@ export default class Attacks extends Component {
     this.state = { attacks: [] };
   }
 
-  async componentDidMount() {
-    getAttacks()
+  callGetAttack() {
+    getAttacks(this.state.attacks.length)
       .then((res) => {
-        this.setState({ attacks: res });
+        this.setState({ attacks: this.state.attacks.concat(res) });
       })
       .catch((err) => {
         alert(err.response.data || err);
       });
   }
 
+  async componentDidMount() {
+    this.callGetAttack();
+  }
+
   render() {
+    const addAttacksFunc = this;
     return (
       <React.Fragment>
         <Title>Recent Attacks</Title>
@@ -126,7 +137,11 @@ export default class Attacks extends Component {
           </TableBody>
         </Table>
         <div className={classes.seeMore}>
-          <Link color="primary" href="#" onClick={preventDefault}>
+          <Link
+            color="primary"
+            href="#"
+            onClick={() => addAttacksFunc.callGetAttack()}
+          >
             See more attacks
           </Link>
         </div>
