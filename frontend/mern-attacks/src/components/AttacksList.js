@@ -12,32 +12,16 @@ import ShowMoreText from 'react-show-more-text';
 
 // todo:
 
-// must - 4h
-// fixing text style - 2h
+// must:
 // search description - 2h:
-// add get more
-// add max number
 
-// bonus - 3h
-// see collection
+// bonus:
+// see statics
 
-// cool - 3h
+// if have time:
+// remove add and edit
 // default routing for react
-// add see more attacks
-
-// if have time - 2h
 // forget password
-
-// Generate Order Data
-function createAttack(
-  id,
-  description,
-  x_mitre_platforms,
-  x_mitre_detection,
-  phase_name
-) {
-  return { id, description, x_mitre_platforms, x_mitre_detection, phase_name };
-}
 
 function sendConfig(url, config, callback) {
   axios
@@ -66,13 +50,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-async function getAttacks(skip) {
+function getInput(element_id) {
+  return document.getElementById(element_id).value;
+}
+
+async function getAttacks(skip, textInputs) {
+  let sendData = {};
+  textInputs.forEach((name) => (sendData[name] = getInput(name)));
+  sendData['skip'] = skip;
+
   const config = { headers: { 'Content-Type': 'application/json' } };
-  config['skip'] = skip;
   config.headers['x-auth-token'] = localStorage.getItem('token');
   const response = await axios.post(
     'http://localhost:2802/attacks',
-    { skip },
+    { sendData },
     {
       headers: config.headers,
     }
@@ -91,12 +82,16 @@ export default class Attacks extends Component {
   }
 
   callGetAttack() {
-    getAttacks(this.state.attacks.length)
+    getAttacks(this.state.attacks.length, ['textSearch'])
       .then((res) => {
         this.setState({ attacks: this.state.attacks.concat(res) });
       })
       .catch((err) => {
-        alert(err.response.data || err);
+        if (err.response !== undefined) {
+          alert(err.response.data);
+        } else {
+          alert(err);
+        }
       });
   }
 

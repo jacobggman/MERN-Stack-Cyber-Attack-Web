@@ -9,10 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Attacks from './AttacksList';
-import Copyright from './Copyright';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Attacks from './AttacksList';
+import Copyright from './Copyright';
+import sendData from './sendData';
 
 const drawerWidth = 240;
 
@@ -100,6 +101,7 @@ class SearchField extends React.Component {
     super(props);
 
     this.name = props.name;
+    this.searchFunction = props.searchFunction;
   }
 
   render() {
@@ -111,7 +113,7 @@ class SearchField extends React.Component {
         label={this.name}
         type={this.name}
         id={this.name}
-        onChange={() => alert('wow!')}
+        onChange={this.searchFunction}
       />
     );
   }
@@ -121,7 +123,6 @@ export default function AttacksPage() {
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -145,11 +146,7 @@ export default function AttacksPage() {
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={12}>
               <Paper>
-                <SearchField name="Id" />
-                <SearchField name="phase_name" />
-                <SearchField name="x_mitre_platforms" />
-                <SearchField name="description" />
-                <SearchField name="x_mitre_detection" />
+                <SearchField name="textSearch" />
                 <Button
                   onClick={() => alert('hi!')}
                   fullWidth

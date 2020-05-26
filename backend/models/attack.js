@@ -24,6 +24,9 @@ const attackSchema = new Schema(
   },
   { timestamps: true }
 );
+attackSchema.index({
+  '$**': 'text',
+});
 
 const Attack = mongoose.model('Attack', attackSchema);
 

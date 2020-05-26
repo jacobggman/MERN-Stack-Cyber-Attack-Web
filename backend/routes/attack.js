@@ -21,7 +21,8 @@ function auth(req, res, next) {
 }
 
 router.route('/').post(auth, (req, res) => {
-  Attack.find()
+  console.log(req.body);
+  Attack.find({ $text: { $search: req.body.textSearch } })
     .sort()
     .skip(req.body.skip || 0)
     .limit(MAX_ATTACKS_PER_REQUEST)
