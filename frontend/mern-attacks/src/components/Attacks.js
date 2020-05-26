@@ -85,11 +85,13 @@ export default class Attacks extends Component {
   }
 
   async componentDidMount() {
-    try {
-      getAttacks().then((res) => this.setState({ attacks: res }));
-    } catch (error) {
-      console.log(error);
-    }
+    getAttacks()
+      .then((res) => {
+        this.setState({ attacks: res });
+      })
+      .catch((err) => {
+        alert(err.response.data || err);
+      });
   }
 
   render() {
