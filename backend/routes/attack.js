@@ -21,10 +21,6 @@ function auth(req, res, next) {
 }
 
 router.route('/').post(auth, (req, res) => {
-  console.log(req.body);
-  Attack.count().then((count) => {
-    console.log(count);
-  });
   Attack.find()
     .sort()
     .skip(req.body.skip || 0)
