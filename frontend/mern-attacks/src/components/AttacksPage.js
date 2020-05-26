@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Attacks from './Attacks';
+import Attacks from './AttacksList';
 import Copyright from './Copyright';
 
 const drawerWidth = 240;
