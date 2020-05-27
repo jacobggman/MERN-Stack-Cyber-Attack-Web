@@ -12,7 +12,7 @@ import ShowMoreText from 'react-show-more-text';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import Pie from './Pie';
 // todo:
 
 // must:
@@ -120,25 +120,30 @@ export default class Attacks extends Component {
   render() {
     return (
       <React.Fragment>
-        <Grid item xs={12} md={12} lg={12}>
-          <Paper>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              name="textSearch"
-              label="textSearch"
-              type="textSearch"
-              id="textSearch"
-              onChange={(e) => {
-                if (e.target.value.length > 2) {
-                  this.callGetAttack(true);
-                } else if (e.target.value.length == 0) {
-                  // if reset the search
-                  this.callGetAttack(true);
-                }
-              }}
-            />
-          </Paper>
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="flex-end"
+        >
+          <TextField
+            variant="outlined"
+            margin="normal"
+            name="textSearch"
+            label="textSearch"
+            type="textSearch"
+            id="textSearch"
+            onChange={(e) => {
+              if (e.target.value.length > 2) {
+                this.callGetAttack(true);
+              } else if (e.target.value.length == 0) {
+                // if reset the search
+                this.callGetAttack(true);
+              }
+            }}
+          />
+          <Pie></Pie>
+          <Pie></Pie>
         </Grid>
         <Title>Attacks List</Title>
         <Table size="small">
