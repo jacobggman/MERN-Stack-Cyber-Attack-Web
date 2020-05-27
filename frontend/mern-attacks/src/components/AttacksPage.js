@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import clsx from 'clsx';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
@@ -101,7 +102,12 @@ class SearchField extends React.Component {
     super(props);
 
     this.name = props.name;
-    this.state = { attacksList: props.attacksList };
+    this.getSearchResponse = this.getSearchResponse.bind(this);
+  }
+
+  getSearchResponse() {
+    this.props.changeAttacks([]); // clear now values
+    this.props.getAttacks();
   }
 
   render() {
@@ -115,65 +121,121 @@ class SearchField extends React.Component {
         id={this.name}
         onChange={(e) => {
           if (e.target.value.length > 2) {
-            alert('search:' + e.target.value + '!');
+            this.getSearchResponse();
+          } else if (e.target.value.length == 0) {
+            // if reset the search
+            this.getSearchResponse();
           }
         }}
       />
     );
   }
 }
+const classes = '';
 
-export default function AttacksPage() {
-  const classes = useStyles();
-  const attacksList = [];
+function getInput(element_id) {
+  return document.getElementById(element_id).value;
+}
 
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar className={clsx()}>
-        <Toolbar className={classes.toolbar}>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Attacks
-          </Typography>
-        </Toolbar>
-      </AppBar>
+async function getAttacks(skip, textInputs) {
+  let sendData = {};
+  textInputs.forEach((name) => (sendData[name] = getInput(name)));
+  sendData['skip'] = skip;
 
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={12} lg={12}>
-              <Paper>
-                <SearchField name="textSearch" attacksList={attacksList} />
-                <Button
-                  onClick={() => alert('hi!')}
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Search
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Attacks />
-              </Paper>
-            </Grid>
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
-      </main>
-    </div>
+  const config = { headers: { 'Content-Type': 'application/json' } };
+  config.headers['x-auth-token'] = localStorage.getItem('token');
+  const response = await axios.post(
+    'http://localhost:2802/attacks',
+    { sendData },
+    {
+      headers: config.headers,
+    }
   );
+  return response.data;
+}
+
+export default class AttacksPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.name = props.name;
+    //this.classes = useStyles();
+    this.state = { attacksList: [] };
+
+    this.changeAttacks = this.changeAttacks.bind(this);
+    this.callGetAttack = this.callGetAttack.bind(this);
+  }
+
+  changeAttacks(newAttacks) {
+    this.setState({ attacksList: newAttacks });
+  }
+
+  callGetAttack() {
+    getAttacks(this.state.attacksList.length, ['textSearch'])
+      .then((res) => {
+        this.setState({ attacksList: this.state.attacksList.concat(res) });
+      })
+      .catch((err) => {
+        if (err.response !== undefined) {
+          alert(err.response.data);
+        } else {
+          alert(err);
+        }
+      });
+  }
+
+  async componentDidMount() {
+    this.callGetAttack();
+  }
+
+  render() {
+    //const classes = useStyles();
+    return (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar className={clsx()}>
+          <Toolbar className={classes.toolbar}>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Attacks
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Box pt={10}></Box>
+          <Container maxWidth="lg" className={classes.container}>
+            <Grid container spacing={1}>
+              <Grid item xs={12} md={12} lg={12}>
+                <Paper>
+                  <SearchField
+                    name="textSearch"
+                    changeAttacks={this.changeAttacks}
+                    getAttacks={this.callGetAttack}
+                  />
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                  <Attacks
+                    getAttacks={this.callGetAttack}
+                    attacks={this.state.attacksList}
+                  />
+                </Paper>
+              </Grid>
+            </Grid>
+            <Box pt={4}>
+              <Copyright />
+            </Box>
+          </Container>
+        </main>
+      </div>
+    );
+  }
 }

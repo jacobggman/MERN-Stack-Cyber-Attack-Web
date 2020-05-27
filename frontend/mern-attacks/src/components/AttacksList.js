@@ -18,6 +18,7 @@ import ShowMoreText from 'react-show-more-text';
 // bonus:
 // see statics - 2h
 // default routing for react
+// logout
 
 function sendConfig(url, config, callback) {
   axios
@@ -46,27 +47,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getInput(element_id) {
-  return document.getElementById(element_id).value;
-}
-
-async function getAttacks(skip, textInputs) {
-  let sendData = {};
-  textInputs.forEach((name) => (sendData[name] = getInput(name)));
-  sendData['skip'] = skip;
-
-  const config = { headers: { 'Content-Type': 'application/json' } };
-  config.headers['x-auth-token'] = localStorage.getItem('token');
-  const response = await axios.post(
-    'http://localhost:2802/attacks',
-    { sendData },
-    {
-      headers: config.headers,
-    }
-  );
-  return response.data;
-}
-
 // class Attacks extends React.Component
 const classes = 'useStyles()';
 
@@ -74,25 +54,6 @@ const classes = 'useStyles()';
 export default class Attacks extends Component {
   constructor(props) {
     super(props);
-    this.state = { attacks: [] };
-  }
-
-  callGetAttack() {
-    getAttacks(this.state.attacks.length, ['textSearch'])
-      .then((res) => {
-        this.setState({ attacks: this.state.attacks.concat(res) });
-      })
-      .catch((err) => {
-        if (err.response !== undefined) {
-          alert(err.response.data);
-        } else {
-          alert(err);
-        }
-      });
-  }
-
-  async componentDidMount() {
-    this.callGetAttack();
   }
 
   render() {
@@ -111,7 +72,7 @@ export default class Attacks extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.state.attacks.map((row) => (
+            {this.props.attacks.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.phase_name}</TableCell>
@@ -131,7 +92,7 @@ export default class Attacks extends Component {
           <Link
             color="primary"
             href="#"
-            onClick={() => addAttacksFunc.callGetAttack()}
+            onClick={() => addAttacksFunc.props.getAttacks()}
           >
             See more attacks
           </Link>
