@@ -13,15 +13,11 @@ import ShowMoreText from 'react-show-more-text';
 // todo:
 
 // must:
-// search description - 2h:
+// search description - 2h
 
 // bonus:
-// see statics
-
-// if have time:
-// remove add and edit
+// see statics - 2h
 // default routing for react
-// forget password
 
 function sendConfig(url, config, callback) {
   axios
