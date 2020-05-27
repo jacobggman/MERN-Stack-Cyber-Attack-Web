@@ -101,7 +101,7 @@ class SearchField extends React.Component {
     super(props);
 
     this.name = props.name;
-    this.searchFunction = props.searchFunction;
+    this.state = { attacksList: props.attacksList };
   }
 
   render() {
@@ -113,7 +113,11 @@ class SearchField extends React.Component {
         label={this.name}
         type={this.name}
         id={this.name}
-        onChange={this.searchFunction}
+        onChange={(e) => {
+          if (e.target.value.length > 2) {
+            alert('search:' + e.target.value + '!');
+          }
+        }}
       />
     );
   }
@@ -121,6 +125,7 @@ class SearchField extends React.Component {
 
 export default function AttacksPage() {
   const classes = useStyles();
+  const attacksList = [];
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
@@ -146,7 +151,7 @@ export default function AttacksPage() {
           <Grid container spacing={1}>
             <Grid item xs={12} md={12} lg={12}>
               <Paper>
-                <SearchField name="textSearch" />
+                <SearchField name="textSearch" attacksList={attacksList} />
                 <Button
                   onClick={() => alert('hi!')}
                   fullWidth
