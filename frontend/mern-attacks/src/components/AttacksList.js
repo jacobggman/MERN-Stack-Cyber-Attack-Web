@@ -18,10 +18,9 @@ import Pie from './Pie';
 import Box from '@material-ui/core/Box';
 
 // bonus:
-// default routing for react
 // logout
+// image and name
 // more files and clean code
-// add more search options, the left button
 // https
 
 function sendConfig(url, config, callback) {
