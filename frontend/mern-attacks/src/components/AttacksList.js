@@ -17,9 +17,9 @@ import TextField from '@material-ui/core/TextField';
 import Pie from './Pie';
 import Box from '@material-ui/core/Box';
 
-// bonus:
+// todo:
 // logout
-// image and name
+// image and name of the web site
 // more files and clean code
 // https
 
