@@ -10,16 +10,13 @@ import Title from './Title';
 import axios from 'axios';
 import ShowMoreText from 'react-show-more-text';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Pie from './Pie';
 // todo:
 
 // must:
-// search description - 2h
 
 // bonus:
-// see statics - 2h
 // default routing for react
 // logout
 
@@ -166,8 +163,14 @@ export default class Attacks extends Component {
               }
             }}
           />
-          <Pie data={this.countType('phase_name', false)}></Pie>
-          <Pie data={this.countType('x_mitre_platforms', true)}></Pie>
+          <Pie
+            data={this.countType('phase_name', false)}
+            name="phase_name"
+          ></Pie>
+          <Pie
+            data={this.countType('x_mitre_platforms', true)}
+            name="x_mitre_platforms"
+          ></Pie>
         </Grid>
         <Title>Attacks List</Title>
         <Table size="small">
