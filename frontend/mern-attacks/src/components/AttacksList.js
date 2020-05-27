@@ -15,12 +15,14 @@ import ShowMoreText from 'react-show-more-text';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Pie from './Pie';
+import Box from '@material-ui/core/Box';
 
 // bonus:
 // default routing for react
 // logout
 // more files and clean code
 // add more search options, the left button
+// https
 
 function sendConfig(url, config, callback) {
   axios
@@ -146,39 +148,9 @@ export default class Attacks extends Component {
         <Grid
           container
           direction="row"
-          justify="space-between"
-          alignItems="flex-end"
+          justify="space-around"
+          alignItems="center"
         >
-          <Container>
-            <Row>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                name="textSearch"
-                label="textSearch"
-                type="textSearch"
-                id="textSearch"
-                onChange={(e) => {
-                  if (e.target.value.length > 2) {
-                    this.callGetAttack(true);
-                  } else if (e.target.value.length == 0) {
-                    // if reset the search
-                    this.callGetAttack(true);
-                  }
-                }}
-              />
-            </Row>
-            <Row>
-              <Button
-                onClick={() => this.callGetAttack(false)}
-                fullWidth
-                variant="contained"
-                color="primary"
-              >
-                See more attacks
-              </Button>
-            </Row>
-          </Container>
           <Pie
             data={this.countType('phase_name', false)}
             name="phase_name"
@@ -188,6 +160,35 @@ export default class Attacks extends Component {
             name="x_mitre_platforms"
           ></Pie>
         </Grid>
+        <Box pt={10}></Box>
+        <TextField
+          variant="outlined"
+          name="textSearch"
+          label="textSearch"
+          type="textSearch"
+          id="textSearch"
+          helperText="Full width!"
+          margin="normal"
+          fullWidth
+          onChange={(e) => {
+            if (e.target.value.length > 2) {
+              this.callGetAttack(true);
+            } else if (e.target.value.length == 0) {
+              // if reset the search
+              this.callGetAttack(true);
+            }
+          }}
+          helperText
+        />
+        <Button
+          onClick={() => this.callGetAttack(false)}
+          fullWidth
+          variant="contained"
+          color="primary"
+        >
+          See more attacks
+        </Button>
+
         <Table size="small">
           <TableHead>
             <TableRow>
