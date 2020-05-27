@@ -2,22 +2,13 @@ import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
 
 class Donut extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      options: {},
-      series: [44, 55, 41, 17, 15],
-      labels: ['A', 'B', 'C', 'D', 'G'],
-    };
-  }
-
   render() {
     return (
       <div className="donut">
         <Chart
-          options={this.state.options}
-          series={this.state.series}
+          label="Series 3"
+          options={{ labels: Object.keys(this.props.data) || [] }}
+          series={Object.values(this.props.data) || []}
           type="donut"
           width="380"
         />

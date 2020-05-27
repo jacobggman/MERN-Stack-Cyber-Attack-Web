@@ -73,6 +73,30 @@ export default class Attacks extends Component {
     this.state = { attacks: [] };
     this.getAttacks = this.getAttacks.bind(this);
     this.callGetAttack = this.callGetAttack.bind(this);
+    this.countType = this.countType.bind(this);
+  }
+
+  addOneDict(dict, key) {
+    if (dict[key] === undefined) {
+      dict[key] = 0;
+    }
+    dict[key] += 1;
+  }
+
+  countType(type, isArray) {
+    let defaultDict = {};
+
+    this.state.attacks.map((row) => {
+      if (isArray) {
+        row[type].map((valueInArray) => {
+          this.addOneDict(defaultDict, valueInArray);
+        });
+      } else {
+        this.addOneDict(defaultDict, row[type]);
+      }
+    });
+
+    return defaultDict;
   }
 
   getInput(element_id) {
@@ -142,8 +166,8 @@ export default class Attacks extends Component {
               }
             }}
           />
-          <Pie></Pie>
-          <Pie></Pie>
+          <Pie data={this.countType('phase_name', false)}></Pie>
+          <Pie data={this.countType('x_mitre_platforms', true)}></Pie>
         </Grid>
         <Title>Attacks List</Title>
         <Table size="small">
