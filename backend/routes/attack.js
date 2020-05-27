@@ -21,7 +21,6 @@ function auth(req, res, next) {
 }
 
 router.route('/').post(auth, (req, res) => {
-  console.log(req.body);
   const search = req.body.sendData.textSearch;
 
   const findArgs = search ? { $text: { $search: search } } : {};
