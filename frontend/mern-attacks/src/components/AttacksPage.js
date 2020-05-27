@@ -161,15 +161,29 @@ export default class AttacksPage extends React.Component {
         <CssBaseline />
         <AppBar className={clsx()}>
           <Toolbar className={classes.toolbar}>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
+            <Grid
+              justify="space-between" // Add it here :)
+              container
+              spacing={24}
             >
-              Attacks
-            </Typography>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                className={classes.title}
+              >
+                Attacks
+              </Typography>
+
+              <Button
+                onClick={() => alert('logout')}
+                variant="contained"
+                color="secondary"
+              >
+                logout
+              </Button>
+            </Grid>
           </Toolbar>
         </AppBar>
 
