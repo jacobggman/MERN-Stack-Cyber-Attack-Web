@@ -6,6 +6,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import Title from './Title';
 import axios from 'axios';
 import ShowMoreText from 'react-show-more-text';
@@ -146,22 +149,36 @@ export default class Attacks extends Component {
           justify="space-between"
           alignItems="flex-end"
         >
-          <TextField
-            variant="outlined"
-            margin="normal"
-            name="textSearch"
-            label="textSearch"
-            type="textSearch"
-            id="textSearch"
-            onChange={(e) => {
-              if (e.target.value.length > 2) {
-                this.callGetAttack(true);
-              } else if (e.target.value.length == 0) {
-                // if reset the search
-                this.callGetAttack(true);
-              }
-            }}
-          />
+          <Container>
+            <Row>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                name="textSearch"
+                label="textSearch"
+                type="textSearch"
+                id="textSearch"
+                onChange={(e) => {
+                  if (e.target.value.length > 2) {
+                    this.callGetAttack(true);
+                  } else if (e.target.value.length == 0) {
+                    // if reset the search
+                    this.callGetAttack(true);
+                  }
+                }}
+              />
+            </Row>
+            <Row>
+              <Button
+                onClick={() => this.callGetAttack(false)}
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                See more attacks
+              </Button>
+            </Row>
+          </Container>
           <Pie
             data={this.countType('phase_name', false)}
             name="phase_name"
@@ -171,24 +188,24 @@ export default class Attacks extends Component {
             name="x_mitre_platforms"
           ></Pie>
         </Grid>
-        <Title>Attacks List</Title>
         <Table size="small">
           <TableHead>
-            <div className={classes.seeMore}>
-              <Link
-                color="primary"
-                href="#"
-                onClick={() => this.callGetAttack(false)}
-              >
-                See more attacks
-              </Link>
-            </div>
             <TableRow>
-              <TableCell>Id</TableCell>
-              <TableCell>phase_name</TableCell>
-              <TableCell>x_mitre_platforms</TableCell>
-              <TableCell>description</TableCell>
-              <TableCell>x_mitre_detection</TableCell>
+              <TableCell>
+                <Title>id</Title>
+              </TableCell>
+              <TableCell>
+                <Title>phase_name</Title>
+              </TableCell>
+              <TableCell>
+                <Title>x_mitre_platforms</Title>
+              </TableCell>
+              <TableCell>
+                <Title>description</Title>
+              </TableCell>
+              <TableCell>
+                <Title>x_mitre_detection</Title>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -209,13 +226,14 @@ export default class Attacks extends Component {
           </TableBody>
         </Table>
         <div className={classes.seeMore}>
-          <Link
-            color="primary"
-            href="#"
+          <Button
             onClick={() => this.callGetAttack(false)}
+            fullWidth
+            variant="contained"
+            color="primary"
           >
             See more attacks
-          </Link>
+          </Button>
         </div>
       </React.Fragment>
     );
