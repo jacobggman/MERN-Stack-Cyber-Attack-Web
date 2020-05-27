@@ -19,7 +19,7 @@ class Donut extends Component {
           options={{ labels: Object.keys(this.props.data) || [] }}
           series={Object.values(this.props.data) || []}
           type="donut"
-          width="380"
+          width="400"
           height="262.7"
         />
       </div>

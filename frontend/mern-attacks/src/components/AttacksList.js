@@ -147,7 +147,7 @@ export default class Attacks extends Component {
         <Grid
           container
           direction="row"
-          justify="space-around"
+          justify="space-evenly"
           alignItems="center"
         >
           <Pie
