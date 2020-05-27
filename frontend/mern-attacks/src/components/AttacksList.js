@@ -12,14 +12,12 @@ import ShowMoreText from 'react-show-more-text';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Pie from './Pie';
-// todo:
-
-// must:
 
 // bonus:
 // default routing for react
 // logout
 // more files and clean code
+// add more search options, the left button
 
 function sendConfig(url, config, callback) {
   axios
