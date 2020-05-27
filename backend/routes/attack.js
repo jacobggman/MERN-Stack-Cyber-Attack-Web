@@ -28,7 +28,7 @@ router.route('/').post(auth, (req, res) => {
 
   Attack.find(findArgs)
     .sort()
-    .skip(req.body.skip || 0)
+    .skip(req.body.sendData.skip || 0)
     .limit(MAX_ATTACKS_PER_REQUEST)
     .then((attacks) => res.json(attacks))
     .catch((err) => res.status(400).json('Error: ' + err));
