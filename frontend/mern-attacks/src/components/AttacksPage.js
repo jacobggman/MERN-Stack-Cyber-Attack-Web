@@ -97,40 +97,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-class SearchField extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.name = props.name;
-    this.getSearchResponse = this.getSearchResponse.bind(this);
-  }
-
-  getSearchResponse() {
-    this.props.changeAttacks([]); // clear now values
-    this.props.getAttacks();
-  }
-
-  render() {
-    return (
-      <TextField
-        variant="outlined"
-        margin="normal"
-        name={this.name}
-        label={this.name}
-        type={this.name}
-        id={this.name}
-        onChange={(e) => {
-          if (e.target.value.length > 2) {
-            this.getSearchResponse();
-          } else if (e.target.value.length == 0) {
-            // if reset the search
-            this.getSearchResponse();
-          }
-        }}
-      />
-    );
-  }
-}
 const classes = '';
 
 function getInput(element_id) {
@@ -162,18 +128,19 @@ export default class AttacksPage extends React.Component {
     //this.classes = useStyles();
     this.state = { attacksList: [] };
 
-    this.changeAttacks = this.changeAttacks.bind(this);
     this.callGetAttack = this.callGetAttack.bind(this);
   }
 
-  changeAttacks(newAttacks) {
-    this.setState({ attacksList: newAttacks });
-  }
-
-  callGetAttack() {
+  callGetAttack(reset = false, updateValue = undefined) {
+    if (reset) {
+      this.state.attacksList = [];
+    }
     getAttacks(this.state.attacksList.length, ['textSearch'])
       .then((res) => {
         this.setState({ attacksList: this.state.attacksList.concat(res) });
+        if (updateValue) {
+          updateValue(this.state.attacksList);
+        }
       })
       .catch((err) => {
         if (err.response !== undefined) {
@@ -189,7 +156,6 @@ export default class AttacksPage extends React.Component {
   }
 
   render() {
-    //const classes = useStyles();
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -212,15 +178,6 @@ export default class AttacksPage extends React.Component {
           <Box pt={10}></Box>
           <Container maxWidth="lg" className={classes.container}>
             <Grid container spacing={1}>
-              <Grid item xs={12} md={12} lg={12}>
-                <Paper>
-                  <SearchField
-                    name="textSearch"
-                    changeAttacks={this.changeAttacks}
-                    getAttacks={this.callGetAttack}
-                  />
-                </Paper>
-              </Grid>
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
                   <Attacks

@@ -9,7 +9,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import axios from 'axios';
 import ShowMoreText from 'react-show-more-text';
-
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 // todo:
 
 // must:
@@ -47,6 +50,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+class SearchField extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.name = props.name;
+    this.getSearchResponse = this.getSearchResponse.bind(this);
+  }
+
+  getSearchResponse() {
+    this.props.getAttacks(true);
+  }
+}
+
 // class Attacks extends React.Component
 const classes = 'useStyles()';
 
@@ -54,12 +70,76 @@ const classes = 'useStyles()';
 export default class Attacks extends Component {
   constructor(props) {
     super(props);
+    this.state = { attacks: [] };
+    this.getAttacks = this.getAttacks.bind(this);
+    this.callGetAttack = this.callGetAttack.bind(this);
+  }
+
+  getInput(element_id) {
+    return document.getElementById(element_id).value;
+  }
+
+  async componentDidMount() {
+    this.callGetAttack();
+  }
+
+  callGetAttack(reset = false) {
+    if (reset) {
+      this.setState({ attacks: [] });
+    }
+    const skip = reset ? 0 : this.state.attacks.length;
+    this.getAttacks(skip)
+      .then((res) => {
+        this.setState({ attacks: this.state.attacks.concat(res) });
+      })
+      .catch((err) => {
+        if (err.response !== undefined) {
+          alert(err.response.data);
+        } else {
+          alert(err);
+        }
+      });
+  }
+
+  async getAttacks(skip) {
+    let sendData = { textSearch: this.getInput('textSearch') };
+    sendData['skip'] = skip;
+
+    const config = { headers: { 'Content-Type': 'application/json' } };
+    config.headers['x-auth-token'] = localStorage.getItem('token');
+    const response = await axios.post(
+      'http://localhost:2802/attacks',
+      { sendData },
+      {
+        headers: config.headers,
+      }
+    );
+    return response.data;
   }
 
   render() {
-    const addAttacksFunc = this;
     return (
       <React.Fragment>
+        <Grid item xs={12} md={12} lg={12}>
+          <Paper>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              name="textSearch"
+              label="textSearch"
+              type="textSearch"
+              id="textSearch"
+              onChange={(e) => {
+                if (e.target.value.length > 2) {
+                  this.callGetAttack(true);
+                } else if (e.target.value.length == 0) {
+                  // if reset the search
+                  this.callGetAttack(true);
+                }
+              }}
+            />
+          </Paper>
+        </Grid>
         <Title>Attacks List</Title>
         <Table size="small">
           <TableHead>
@@ -72,7 +152,7 @@ export default class Attacks extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.attacks.map((row) => (
+            {this.state.attacks.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.phase_name}</TableCell>
@@ -92,7 +172,7 @@ export default class Attacks extends Component {
           <Link
             color="primary"
             href="#"
-            onClick={() => addAttacksFunc.props.getAttacks()}
+            onClick={() => this.callGetAttack(false)}
           >
             See more attacks
           </Link>
