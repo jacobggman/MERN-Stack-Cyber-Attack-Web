@@ -19,6 +19,7 @@ import Pie from './Pie';
 // bonus:
 // default routing for react
 // logout
+// more files and clean code
 
 function sendConfig(url, config, callback) {
   axios
@@ -175,6 +176,15 @@ export default class Attacks extends Component {
         <Title>Attacks List</Title>
         <Table size="small">
           <TableHead>
+            <div className={classes.seeMore}>
+              <Link
+                color="primary"
+                href="#"
+                onClick={() => this.callGetAttack(false)}
+              >
+                See more attacks
+              </Link>
+            </div>
             <TableRow>
               <TableCell>Id</TableCell>
               <TableCell>phase_name</TableCell>

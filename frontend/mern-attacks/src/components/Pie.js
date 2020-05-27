@@ -17,7 +17,7 @@ class Donut extends Component {
           series={Object.values(this.props.data) || []}
           type="donut"
           width="380"
-          height="262.7"
+          height="222.7"
         />
       </div>
     );
