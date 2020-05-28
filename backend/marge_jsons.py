@@ -1,7 +1,7 @@
 import json
 import glob
 
-PATH = r'C:\Users\User\Desktop\מגשימים\שנה ב\my projects\רפאל\cti\enterprise-attack\attack-pattern'
+PATH = r''
 print(PATH + '\\' + "*.json")
 
 class Json(object):
