@@ -27,9 +27,9 @@ export default class DownPart extends Component {
   countType(type, isArray) {
     let defaultDict = {};
 
-    this.state.attacks.map((row) => {
+    this.state.attacks.forEach((row) => {
       if (isArray) {
-        row[type].map((valueInArray) => {
+        row[type].forEach((valueInArray) => {
           this.addOneDict(defaultDict, valueInArray);
         });
       } else {
@@ -103,18 +103,16 @@ export default class DownPart extends Component {
           label="Search"
           type="Search"
           id="Search"
-          helperText="Full width!"
           margin="normal"
           fullWidth
           onChange={(e) => {
             if (e.target.value.length > 2) {
               this.callGetAttack(true);
-            } else if (e.target.value.length == 0) {
+            } else if (e.target.value.length === 0) {
               // if reset the search
               this.callGetAttack(true);
             }
           }}
-          helperText
         />
 
         <GetMoreAttacks callGetAttack={this.callGetAttack} />

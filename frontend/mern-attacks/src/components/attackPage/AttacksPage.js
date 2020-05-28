@@ -22,7 +22,7 @@ export default class AttacksPage extends React.Component {
 
   callGetAttack(reset = false, updateValue = undefined) {
     if (reset) {
-      this.state.attacksList = [];
+      this.setState({ attacksList: [] });
     }
     getAttacks(this.state.attacksList.length, ['Search'])
       .then((res) => {
