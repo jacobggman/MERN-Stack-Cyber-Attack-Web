@@ -210,7 +210,7 @@ export default class AttacksPage extends React.Component {
               <Typography
                 component="h1"
                 variant="h6"
-                color="inherit"
+                color="secondary"
                 noWrap
                 className={classes.title}
               >
