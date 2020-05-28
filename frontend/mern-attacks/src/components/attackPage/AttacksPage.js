@@ -4,10 +4,10 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Attacks from './AttacksList';
 import Copyright from '../Copyright';
 import getAttacks from '../../helpers/getAttacks';
 import Toolbar from '../Toolbar';
+import DownPart from './DownPart';
 const classes = '';
 
 export default class AttacksPage extends React.Component {
@@ -56,7 +56,7 @@ export default class AttacksPage extends React.Component {
             <Grid container spacing={1}>
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
-                  <Attacks
+                  <DownPart
                     getAttacks={this.callGetAttack}
                     attacks={this.state.attacksList}
                   />
