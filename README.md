@@ -5,11 +5,13 @@
 ### Start backend side
 
 ```
+npm install
 nodemon server
 ```
 
 ### Start frontend side
 
 ```
+npm install
 npm start
 ```
