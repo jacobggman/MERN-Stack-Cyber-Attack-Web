@@ -120,6 +120,47 @@ async function getAttacks(skip, textInputs) {
   return response.data;
 }
 
+class BackToTop extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { windowPos: window.pageYOffset };
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.listenToScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.listenToScroll);
+  }
+
+  listenToScroll = () => {
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+
+    const scrolled = winScroll;
+
+    this.setState({
+      windowPos: scrolled,
+    });
+  };
+
+  render() {
+    return (
+      <Button
+        onClick={() => {
+          window.scrollTo(0, 0);
+        }}
+        color="secondary"
+        variant="contained"
+        disabled={this.state.windowPos < 300}
+      >
+        Back To The Top
+      </Button>
+    );
+  }
+}
+
 export default class AttacksPage extends React.Component {
   constructor(props) {
     super(props);
@@ -176,6 +217,7 @@ export default class AttacksPage extends React.Component {
                 Attacks
               </Typography>
 
+              <BackToTop></BackToTop>
               <Button
                 onClick={() => {
                   localStorage.removeItem('token');
