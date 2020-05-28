@@ -34,6 +34,7 @@ function App() {
       <Helmet>
         <title>Cyber Attacks</title>
       </Helmet>
+
       <Router>
         {/*<NavBar />*/}
         <br />
