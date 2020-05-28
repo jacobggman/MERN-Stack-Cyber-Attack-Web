@@ -149,7 +149,7 @@ class BackToTop extends React.Component {
     return (
       <Button
         onClick={() => {
-          window.scrollTo(0, 0);
+          window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         }}
         color="secondary"
         variant="contained"
