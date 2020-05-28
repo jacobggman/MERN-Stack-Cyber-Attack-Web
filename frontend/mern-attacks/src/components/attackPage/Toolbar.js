@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
-import BackToTop from './attackPage/BackToTop';
+import BackToTop from './BackToTop';
 
 const classes = '';
 

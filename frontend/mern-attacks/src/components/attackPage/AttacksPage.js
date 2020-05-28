@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Copyright from '../Copyright';
 import getAttacks from '../../helpers/getAttacks';
-import Toolbar from '../Toolbar';
+import Toolbar from './Toolbar';
 import DownPart from './DownPart';
 const classes = '';
 
