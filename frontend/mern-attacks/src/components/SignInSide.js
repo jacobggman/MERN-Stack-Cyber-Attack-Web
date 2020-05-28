@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import Copyright from './Copyright';
-import sendData from './sendData';
+import sendData from '../helpers/sendData';
 
 const useStyles = makeStyles((theme) => ({
   root: {
