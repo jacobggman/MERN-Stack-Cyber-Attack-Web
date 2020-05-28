@@ -126,7 +126,7 @@ export default class Attacks extends Component {
   }
 
   async getAttacks(skip) {
-    let sendData = { textSearch: this.getInput('textSearch') };
+    let sendData = { Search: this.getInput('Search') };
     sendData['skip'] = skip;
 
     const config = { headers: { 'Content-Type': 'application/json' } };
@@ -162,10 +162,10 @@ export default class Attacks extends Component {
         <Box pt={10}></Box>
         <TextField
           variant="outlined"
-          name="textSearch"
-          label="textSearch"
-          type="textSearch"
-          id="textSearch"
+          name="Search"
+          label="Search"
+          type="Search"
+          id="Search"
           helperText="Full width!"
           margin="normal"
           fullWidth

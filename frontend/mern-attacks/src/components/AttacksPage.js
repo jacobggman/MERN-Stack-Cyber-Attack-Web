@@ -176,7 +176,7 @@ export default class AttacksPage extends React.Component {
     if (reset) {
       this.state.attacksList = [];
     }
-    getAttacks(this.state.attacksList.length, ['textSearch'])
+    getAttacks(this.state.attacksList.length, ['Search'])
       .then((res) => {
         this.setState({ attacksList: this.state.attacksList.concat(res) });
         if (updateValue) {
