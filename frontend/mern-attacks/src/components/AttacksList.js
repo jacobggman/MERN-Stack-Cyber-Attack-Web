@@ -18,7 +18,6 @@ import Pie from './Pie';
 import Box from '@material-ui/core/Box';
 
 // todo:
-// logout
 // image and name of the web site
 // more files and clean code
 // https

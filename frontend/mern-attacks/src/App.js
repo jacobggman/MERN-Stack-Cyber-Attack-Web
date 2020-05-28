@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import { Helmet } from 'react-helmet';
 import {
   BrowserRouter as Router,
   Route,
@@ -31,6 +31,9 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <Helmet>
+        <title>Cyber Attacks</title>
+      </Helmet>
       <Router>
         {/*<NavBar />*/}
         <br />
