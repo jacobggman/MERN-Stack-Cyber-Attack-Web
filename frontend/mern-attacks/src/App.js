@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import SignInSide from './components/SignInSide.js';
 import SignUp from './components/SignUp.js';
-import AttacksPage from './components/AttacksPage';
+import AttacksPage from './components/attackPage/AttacksPage';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
 import green from '@material-ui/core/colors/green';

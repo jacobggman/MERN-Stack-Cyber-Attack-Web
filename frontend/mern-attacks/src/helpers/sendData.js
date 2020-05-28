@@ -1,8 +1,5 @@
 import axios from 'axios';
-
-function getInput(element_id) {
-  return document.getElementById(element_id).value;
-}
+import getInput from './getInput';
 
 export default function sendData(url, fieldsNames, callback) {
   let sendData = {};

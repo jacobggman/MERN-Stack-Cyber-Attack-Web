@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Title from './Title';
+import Title from '../Title';
 import axios from 'axios';
 import ShowMoreText from 'react-show-more-text';
 import Grid from '@material-ui/core/Grid';
