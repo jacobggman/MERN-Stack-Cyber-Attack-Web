@@ -4,12 +4,7 @@ let UserModel = require('../models/user');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
-const HOUR = 3600;
-
-function getHash(password) {
-  hash = bcryptjs.hash(password, 10);
-  return hash;
-}
+const EXPIRATION_TIME = 3600;
 
 function returnError(res, err) {
   res.status(400).json('Error: ' + err);
@@ -37,7 +32,7 @@ router.route('/add').post((req, res) => {
             { user: user.id },
             config.get('jwtSecret'),
             {
-              expiresIn: HOUR,
+              expiresIn: EXPIRATION_TIME,
             },
             (err, token) => {
               if (err) throw err;
@@ -81,7 +76,7 @@ router.route('/login').post((req, res) => {
         { user: user.id },
         config.get('jwtSecret'),
         {
-          expiresIn: HOUR,
+          expiresIn: expiration_time,
         },
         (err, token) => {
           if (err) throw err;
