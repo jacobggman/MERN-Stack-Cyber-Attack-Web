@@ -8,6 +8,7 @@ import Copyright from '../Copyright';
 import getAttacks from '../../helpers/getAttacks';
 import Toolbar from './Toolbar';
 import DownPart from './DownPart';
+
 const classes = '';
 
 export default class AttacksPage extends React.Component {

@@ -1,11 +1,11 @@
 import React from 'react';
+import ShowMoreText from 'react-show-more-text';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../Title';
-import ShowMoreText from 'react-show-more-text';
 
 export default class AttacksList extends React.Component {
   render() {
