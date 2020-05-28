@@ -177,7 +177,10 @@ export default class AttacksPage extends React.Component {
               </Typography>
 
               <Button
-                onClick={() => alert('logout')}
+                onClick={() => {
+                  localStorage.removeItem('token');
+                  window.location = 'http://localhost:3000/login';
+                }}
                 variant="contained"
                 color="secondary"
               >

@@ -22,6 +22,7 @@ import Box from '@material-ui/core/Box';
 // image and name of the web site
 // more files and clean code
 // https
+// forget password
 
 function sendConfig(url, config, callback) {
   axios
