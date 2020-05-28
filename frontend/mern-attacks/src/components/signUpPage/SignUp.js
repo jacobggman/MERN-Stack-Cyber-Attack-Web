@@ -1,6 +1,5 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
@@ -11,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from '../Copyright';
-import sendData from '../../helpers/sendData';
+import ToAttacksButton from '../ToAttacksButton';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -95,24 +94,12 @@ export default function SignUp() {
               />
             </Grid>
           </Grid>
-          <Button
-            onClick={() =>
-              sendData(
-                'http://localhost:2802/users/add',
-                ['password', 'email', 'firstName', 'lastName'],
-                (res) => {
-                  localStorage.setItem('token', res.token);
-                  window.location = 'http://localhost:3000/attacks';
-                }
-              )
-            }
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
+
+          <ToAttacksButton
+            fieldsList={['password', 'email', 'firstName', 'lastName']}
+            text="Sign Up"
+            url="http://localhost:2802/users/add"
+          />
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
